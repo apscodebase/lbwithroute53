@@ -1,6 +1,6 @@
 resource "aws_key_pair" "custom_pair" {
-  key_name                      = "examplekey"
-  public_key                    = file("./apscodebase.pub")
+  key_name   = "examplekey"
+  public_key = file("./apscodebase.pub")
 }
 
 resource "aws_security_group" "allow_http_ssh" {
@@ -37,12 +37,12 @@ resource "aws_security_group" "allow_http_ssh" {
 
 
 module "vm1_instance" {
-  source                             = "./modules/aws_ec2instance"
-  ami_id                             = "ami-0a248ce88bcc7bd23"
-  aws_subnet_id                      = module.mgmt-subnet.public_subnet_id
-  security_group_ids                 = [aws_security_group.allow_http_ssh.id]
-  keyname                            = aws_key_pair.custom_pair.key_name
-  user_data                          = <<-EOF
+  source             = "./modules/aws_ec2instance"
+  ami_id             = "ami-0a248ce88bcc7bd23"
+  aws_subnet_id      = module.mgmt-subnet.public_subnet_id
+  security_group_ids = [aws_security_group.allow_http_ssh.id]
+  keyname            = aws_key_pair.custom_pair.key_name
+  user_data          = <<-EOF
                     #!/bin/bash
                     sudo yum install epel-release -y
                     sudo yum install nginx -y
@@ -55,12 +55,12 @@ EOF
 
 
 module "vm2_instance" {
-  source                             = "./modules/aws_ec2instance"
-  ami_id                             = "ami-0a248ce88bcc7bd23"
-  aws_subnet_id                      = module.mgmt-subnet.public_subnet_id
-  security_group_ids                 = [aws_security_group.allow_http_ssh.id]
-  keyname                            = aws_key_pair.custom_pair.key_name
-  user_data                          = <<-EOF
+  source             = "./modules/aws_ec2instance"
+  ami_id             = "ami-0a248ce88bcc7bd23"
+  aws_subnet_id      = module.mgmt-subnet.public_subnet_id
+  security_group_ids = [aws_security_group.allow_http_ssh.id]
+  keyname            = aws_key_pair.custom_pair.key_name
+  user_data          = <<-EOF
                     #!/bin/bash
                     sudo yum install epel-release -y
                     sudo yum install nginx -y

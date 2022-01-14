@@ -1,5 +1,5 @@
 data "aws_route53_zone" "selected" {
-  name         = "apscodebase.com"
+  name = "apscodebase.com"
 }
 
 resource "aws_route53_record" "www" {
